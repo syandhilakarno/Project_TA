@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Jalankan migration.
+     */
+    public function up(): void
+    {
+        Schema::create('dosen', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('nidn')->unique();
+            $table->string('email')->unique();
+            $table->string('no_hp')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Hapus tabel saat rollback.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('dosen');
+    }
+};

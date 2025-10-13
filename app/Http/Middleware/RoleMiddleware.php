@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (!Auth::check() || Auth::user()->role !== $role) {
-            return redirect('/')->withErrors(['msg' => 'Unauthorized access']);
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
+
+        if (!in_array(Auth::user()->role, $roles)) {
+            abort(403, 'Akses ditolak.');
+        }
+
         return $next($request);
     }
 }
