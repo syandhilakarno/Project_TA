@@ -13,4 +13,3 @@ class KoordinatorController extends Controller
         return view('dashboard.koordinator.list-mahasiswa', compact('mahasiswa'));
     }
 }
-

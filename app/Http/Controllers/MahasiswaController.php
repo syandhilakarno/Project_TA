@@ -33,9 +33,5 @@ public function ploting()
     $mahasiswa = Mahasiswa::all();
     $dosen = Dosen::all(); // pastikan ada model Dosen
         return view('dashboard.koordinator.ploting-pembimbing', compact('mahasiswa', 'dosen'));
-
-
 }
-
-
 }
