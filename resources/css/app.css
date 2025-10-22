@@ -1,121 +1,296 @@
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #f4f6f9;
-        margin: 0;
-        padding: 0;
-    }
+/* ===========================
+   Global
+=========================== */
 
-    .container {
-        display: flex;
-        height: 100vh;
-    }
 
-    /* Sidebar */
-    .sidebar {
-        width: 220px;
-        background-color: #ffffff;
-        border-right: 1px solid #ddd;
-        display: flex;
-        flex-direction: column;
-        padding-top: 20px;
-    }
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
 
-    .sidebar a {
-        padding: 15px 20px;
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-        transition: 0.2s;
-    }
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
 
-    .sidebar a:hover, .sidebar a.active {
-        background-color: #007bff;
-        color: #fff;
-        border-radius: 5px;
-        margin: 0 10px;
-    }
+/* ===========================
+   Sidebar
+=========================== */
+.sidebar {
+    width: 220px;
+    background: linear-gradient(180deg, #007bff, #00aaff);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    transition: width 0.3s;
+    overflow: hidden;
+}
 
-    /* Main content */
-    .main {
-        flex: 1;
-        background-color: #f0f4ff;
-        display: flex;
-        flex-direction: column;
-    }
+.sidebar.collapsed {
+    width: 60px;
+}
 
-    /* Header */
-    .header {
-        background: linear-gradient(90deg, #dfefff, #007bff);
-        color: #fff;
-        padding: 15px 25px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+.sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    white-space: nowrap;
+    border-radius: 8px;
+    margin: 5px 10px;
+}
 
-    .header .logo {
-        display: flex;
-        align-items: center;
-    }
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
 
-    .header img {
-        height: 110px;
-        margin-right: 15px;
-    }
+.sidebar a.active {
+    background-color: rgba(255, 255, 255, 0.3);
+}
 
-    .profile {
-        text-align: right;
-    }
+.sidebar.collapsed a {
+    justify-content: center;
+    padding: 15px 0;
+    font-size: 14px;
+    overflow: hidden;
+}
 
-    .profile img {
-        height: 50px;
-        width: 100px;
-        border-radius: 10%;
-        margin-left: 10px;
-    }
+.sidebar a span {
+    display: inline-block;
+    transition: opacity 0.3s;
+}
 
-    /* Content */
-    .content {
-        padding: 25px;
-    }
+.sidebar.collapsed a span {
+    opacity: 0;
+}
 
-    .content h2 {
-        color: #007bff;
-        margin-bottom: 15px;
-    }
+/* ===========================
+   Main content
+=========================== */
+.main {
+    flex: 1;
+    background-color: #f0f4ff;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    overflow-y: auto; 
+}
 
-    .search-bar {
-        margin-bottom: 15px;
-    }
+/* ===========================
+   Header
+=========================== */
+.header {
+    background: linear-gradient(90deg, #dfefff, #007bff);
+    color: #fff;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
 
-    .search-bar input {
-        width: 100%;
-        padding: 8px 12px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        outline: none;
-    }
+.header .logo {
+    display: flex;
+    align-items: center;
+}
 
-    /* Table */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        background: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-    }
+.header img {
+    height: 80px;
+    margin-right: 15px;
+    object-fit: contain;
+}
 
-    table th, table td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
+.profile {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-    table th {
-        background-color: #007bff;
-        color: #fff;
-    }
+.profile img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
-    tr:hover {
-        background-color: #f1f5ff;
-    }
+/* ===========================
+   Content
+=========================== */
+.content {
+    padding: 25px;
+}
+
+.content h2 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* Search Bar */
+.search-bar {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px 10px 35px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-bar input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+/* ===========================
+   Table
+=========================== */
+table {
+    table-layout: auto;
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    min-width: 100%;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+    word-wrap: break-word; /* agar nama panjang tidak terpotong */
+}
+
+table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f1f5ff;
+    transition: background-color 0.3s;
+}
+
+/* Highlight untuk baris sidang */
+#sidangTable tbody tr:hover {
+    background-color: #e9f7ef;
+    transition: background-color 0.3s;
+}
+
+/* Checkbox styling */
+.sidang-checkbox:checked {
+    background-color: #d1ecf1 !important;
+}
+
+/* Input & select di table */
+.table td input,
+.table td select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Select2 */
+.table td select.select2 {
+    width: 100% !important;
+    
+}
+
+.select2-container--default .select2-selection--single {
+    height: 36px;
+    line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===========================
+   Nama Ketua & Penguji Full
+=========================== */
+.nama-lengkap {
+    max-width: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-wrap: break-word !important;
+}
+
+/* ===========================
+   Toggle Button
+=========================== */
+.toggle-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 10px 10px 10px;
+    color: #007bff;
+}
+
+.toggle-btn:hover {
+    color: #0056b3;
+}
+
+
+/* ===========================
+   CSS TAMBAHAN UNTUK TABEL SCROLL
+=========================== */
+
+/* 1. Ini adalah div pembungkus yang Anda tambahkan di HTML.
+   Ini yang akan membuat scrollbar horizontal muncul. */
+.table-responsive-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    margin-bottom: 15px; /* Memberi jarak ke tombol "Simpan" */
+}
+
+/* 2. Ini memaksa tabel di dalamnya agar tidak "memperkecil" kolom
+   atau memotong teks ke bawah (wrap). */
+.table-responsive-wrapper table th,
+.table-responsive-wrapper table td {
+    white-space: nowrap; 
+}
+
+/* 3. Ini memberi LEBAR MINIMUM pada kolom yang Anda bilang sempit.
+   (Nama, Judul, dan 3 kolom Dosen). 
+   Anda bisa sesuaikan angkanya jika perlu. */
+
+#sidangTable th:nth-child(2), /* Kolom Nama Mahasiswa */
+#sidangTable td:nth-child(2) {
+    min-width: 200px;
+}
+
+#sidangTable th:nth-child(4), /* Kolom Judul TA */
+#sidangTable td:nth-child(4) {
+    min-width: 300px;
+}
+
+#sidangTable th:nth-child(6), /* Kolom Ketua Sidang */
+#sidangTable td:nth-child(6),
+#sidangTable th:nth-child(7), /* Kolom Penguji 1 */
+#sidangTable td:nth-child(7),
+#sidangTable th:nth-child(8), /* Kolom Penguji 2 */
+#sidangTable td:nth-child(8) {
+min-width: 250px; /* Lebar untuk Select2 nama dosen */
+}

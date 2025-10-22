@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -21,8 +22,8 @@ class AuthController extends Controller
 
             return match ($role) {
                 'admin' => redirect()->route('admin.dashboard'),
-                'koordinator' => redirect()->route('koordinator.dashboard'),
-                'dosen' => redirect()->route('dosen.dashboard'),
+                'koordinator' => redirect()->route('koordinator.ploting-pembimbing'),
+                'dosen' => redirect()->route('dosen.bimbingan'),
                 default => redirect()->route('mahasiswa.dashboard'),
             };
         }

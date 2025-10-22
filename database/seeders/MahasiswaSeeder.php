@@ -3,35 +3,44 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class MahasiswaSeeder extends Seeder
 {
-    public function run(): void
+    public function run()
     {
-        Mahasiswa::create([
-            'nama' => 'Rafly Nugraha',
-            'nim' => '231001',
-            'periode' => '2025',
-            'status' => 'Disetujui',
-            'sks' => 144,
-            'ipk_1_2' => 3.25,
-            'ipk_3_4' => 3.35,
-            'ipk_5_6' => 3.45,
-            'ipk_7_8' => 3.60,
+        $this->command->info('Membuat 30 data mahasiswa dummy...');
 
-        ]);
+        for ($i = 0; $i < 30; $i++) {
+            $nim = '12401' . fake()->unique()->numerify('#####');
+            $nama = fake()->name();
+            $email = $nim . '@mhs.ubpkarawang.ac.id';
 
-        Mahasiswa::create([
-            'nama' => 'Lina Oktavia',
-            'nim' => '231002',
-            'periode' => '2025',
-            'status' => 'Menunggu',
-            'sks' => 140,
-            'ipk_1_2' => 3.10,
-            'ipk_3_4' => 3.20,
-            'ipk_5_6' => 3.30,
-            'ipk_7_8' => 3.40
-        ]);
+            // 1. Buat akun LOGIN di tabel 'users'
+            $user = User::create([
+                'name' => $nama,
+                'email' => $email,
+                'password' => Hash::make('password'),
+                'role' => 'mahasiswa',
+            ]);
+
+            // 2. Buat akun PROFIL di tabel 'mahasiswa'
+            //    (Tanpa nama, email, atau password)
+            Mahasiswa::create([
+                'nama' => $nama,
+                'user_id' => $user->id, // Hubungkan ke user
+                'nim' => $nim,
+                'periode' => fake()->randomElement(['2023', '2024', '2025']),
+                'sks' => fake()->numberBetween(80, 130),
+                'ipk' => fake()->randomFloat(2, 2.75, 3.85),
+                'nilai_kp' => fake()->randomElement(['A', 'A-', 'B+', 'B']),
+                'status_ploting' => 'pending',
+                'dosen_id' => null, 
+            ]);
+        }
+        $this->command->info('Pembuatan data mahasiswa selesai.');
     }
 }

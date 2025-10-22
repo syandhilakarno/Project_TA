@@ -13,7 +13,11 @@ return new class extends Migration
             $table->unsignedBigInteger('mahasiswa_id');
             $table->string('judul_ta')->nullable();
             $table->date('tanggal_sidang')->nullable();
-            $table->string('penguji')->nullable();
+            $table->string('ketua_id')->nullable();
+            $table->string('penguji_id')->nullable();
+            $table->string('penguji2_id')->nullable();
+            $table->string('ruang_sidang')->nullable();
+            
             $table->timestamps();
 
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa')->onDelete('cascade');
