@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 // dan nama tabel 'mahasiswa' (singular)
 class Mahasiswa extends Model 
 {
-    use HasFactory;     
+    use HasFactory;
 
     // Nama tabel Anda (jika singular)
     protected $table = 'mahasiswa'; 
