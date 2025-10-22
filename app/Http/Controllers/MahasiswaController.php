@@ -28,9 +28,9 @@ class MahasiswaController extends Controller
         $dosen = \App\Models\Dosen::all();
 
         return view('dashboard.koordinator.ploting-pembimbing', compact('mahasiswa', 'dosen'));
-    }
 
-    
+
+}
 
 
 }
