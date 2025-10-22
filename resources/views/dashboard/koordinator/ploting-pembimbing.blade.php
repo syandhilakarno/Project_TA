@@ -41,7 +41,7 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+               <tbody>
                   @forelse($mahasiswa as $mhs)
                   <form action="{{ route('koordinator.updatePloting', $mhs->id) }}" method="POST">
                       @csrf

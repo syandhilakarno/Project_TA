@@ -13,7 +13,7 @@ body {
 .container {
     display: flex;
     height: 100vh;
-    overflow: hidden;
+
 }
 
 /* ===========================
@@ -80,8 +80,8 @@ body {
     background-color: #f0f4ff;
     display: flex;
     flex-direction: column;
-    overflow-x: auto;
-    overflow-y: auto; 
+    overflow-y: auto;
+    min-width: 0;
 }
 
 /* ===========================

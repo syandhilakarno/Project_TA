@@ -65,7 +65,7 @@
                 $totalLangkah = count($langkahBimbingan);
             @endphp
 
-            <table id="bimbinganTable" class="table table-bordered table-striped ">
+            <table id="bimbinganTable" class="">
                 <thead class="table-primary text-center align-middle ">
                     <tr>
                         <th><input type="checkbox" id="selectAll"></th>

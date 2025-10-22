@@ -26,13 +26,13 @@ class DosenBimbinganController extends Controller
                             ->get();
 
         // 3. Kirim data yang sudah difilter ke view
-        return view('dosen.bimbingan', compact('bimbingan'));
+        return view('dashboard.dosen.bimbingan', compact('bimbingan'));
     }
 
     /**
      * Update data bimbingan untuk satu mahasiswa (via tombol simpan per baris).
      */
-    public function update(Request $request, $id)
+   public function update(Request $request, $id) // <-- UBAH DI SINI
     {
         $request->validate([
             'progres' => 'nullable|array',
@@ -41,10 +41,9 @@ class DosenBimbinganController extends Controller
         ]);
 
         try {
-            $dosenId = Auth::id(); // Ambil ID login dari tabel users
+            $dosenId = Auth::id(); 
             $bimbingan = Bimbingan::findOrFail($id);
 
-            // 3. Cek keamanan menggunakan Auth::id()
             if ($bimbingan->dosen_id !== $dosenId) {
                 return redirect()->back()->with('error', 'Anda tidak berhak mengubah data ini.');
             }
