@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Jalankan migration.
-     */
     public function up(): void
     {
         Schema::create('dosen', function (Blueprint $table) {
@@ -17,13 +14,11 @@ return new class extends Migration
             $table->string('nidn')->unique();
             $table->string('email')->unique();
             $table->string('no_hp')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // relasi ke users
             $table->timestamps();
         });
     }
 
-    /**
-     * Hapus tabel saat rollback.
-     */
     public function down(): void
     {
         Schema::dropIfExists('dosen');

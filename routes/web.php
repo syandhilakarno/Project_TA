@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
 
 // 🔹 Khusus Koordinator
 Route::middleware(['auth', 'role:koordinator'])->prefix('koordinator')->name('koordinator.')->group(function () {
-    
+
     // List Mahasiswa
     Route::get('/listmahasiswa', [KoordinatorController::class, 'listmahasiswa'])->name('listmahasiswa');
     Route::post('/mahasiswa/move-to-ploting', [KoordinatorController::class, 'moveToPloting'])->name('mahasiswa.moveToPloting');
@@ -36,17 +36,28 @@ Route::middleware(['auth', 'role:koordinator'])->prefix('koordinator')->name('ko
     Route::get('/ploting-pembimbing', [KoordinatorController::class, 'Ploting'])->name('ploting-pembimbing'); // <-- INI YANG BENAR
     Route::put('/ploting-pembimbing/{id}', [KoordinatorController::class, 'updatePloting'])->name('updatePloting'); // <-- INI YANG BENAR
     Route::post('/ploting/update-bulk', [KoordinatorController::class, 'updatePlotingBulk'])->name('updatePlotingBulk');
-// Halaman Sidang
+    // Halaman Sidang
     Route::get('/sidang', [KoordinatorController::class, 'Sidang'])->name('sidang');
-    
+
     // RUTE UNTUK UPDATE SIDANG (INI YANG ANDA BUTUHKAN)
     Route::put('/sidang/update/{id}', [KoordinatorController::class, 'updateSidang'])->name('updateSidang');
     Route::post('/sidang/update-bulk', [KoordinatorController::class, 'updateSidangBulk'])->name('updateSidangBulk');
 });
 // 🔹 Khusus Dosen
 Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->name('dosen.')->group(function () {
-    
-   Route::get('/bimbingan', [DosenBimbinganController::class, 'index'])->name('bimbingan');
+
+    Route::get('/bimbingan', [DosenBimbinganController::class, 'index'])->name('bimbingan');
     Route::put('/bimbingan/update/{id}', [DosenBimbinganController::class, 'updateBimbingan'])->name('updateBimbingan');
     Route::post('/bimbingan/update-bulk', [DosenBimbinganController::class, 'updateBulk'])->name('updateBimbinganBulk');
+});
+
+Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->name('mahasiswa.')->group(function () {
+
+    // Dashboard mahasiswa
+    Route::get('/dashboard', [MahasiswaController::class, 'dashboard'])->name('dashboard');
+
+    // Contoh route tambahan, misal melihat bimbingan
+    Route::get('/bimbingan', [MahasiswaController::class, 'bimbingan'])->name('bimbingan');
+
+    // Route lain bisa ditambahkan sesuai fitur mahasiswa
 });

@@ -21,20 +21,17 @@ class MahasiswaController extends Controller
         $mahasiswa = Mahasiswa::where('user_id', $userId)->first();
 
         if (!$mahasiswa) {
-            // Ini terjadi jika user login sebagai mhs tapi tidak punya profil
+            // Jika user login sebagai mahasiswa tapi tidak punya profil
             Auth::logout();
             return redirect('/login')->with('msg', 'Profil mahasiswa Anda tidak ditemukan.');
         }
 
-        // 3. Ambil data bimbingan mahasiswa ini
+        // 3. Ambil data bimbingan mahasiswa ini (relasi ke dosen)
         $bimbingan = Bimbingan::where('mahasiswa_id', $mahasiswa->id)
-                              ->with('dosen') // Ambil data dosen pembimbing
-                              ->first();
+            ->with('dosen')
+            ->first();
 
-        // 4. Kirim data ke view
-        return view('dashboard.mahasiswa.mahasiswa', compact('mahasiswa', 'bimbingan'));
+        // 4. Kirim data ke view (sesuaikan path dengan folder dashboard)
+        return view('dashboard.mahasiswa.dashboard', compact('mahasiswa', 'bimbingan'));
     }
-
-    // HAPUS SEMUA FUNGSI LAIN DARI FILE INI
-    // (Fungsi 'index', 'Ploting', 'updatePloting' BUKAN milik controller ini)
 }
